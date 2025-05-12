@@ -8,14 +8,15 @@ datasource db {
 }
 
 model Client {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  email     String   @unique @db.VarChar(255)
-  phone     String?  @db.VarChar(20)
-  cnpj       String?  @unique @db.VarChar(14)
-  address  String?  @db.Text
-  registrationDate DateTime @default(now())
-  updateDate DateTime @updatedAt
+  id                Int      @id @default(autoincrement())
+  asaasCustomerId   String?   @db.VarChar(40)
+  name              String   @db.VarChar(255)
+  email             String   @unique @db.VarChar(255)
+  phone             String?  @db.VarChar(20)
+  cnpj              String?  @unique @db.VarChar(14)
+  address           String?  @db.Text
+  registrationDate  DateTime @default(now())
+  updateDate        DateTime @updatedAt
 }
 
 model User {
