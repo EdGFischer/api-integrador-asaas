@@ -1,0 +1,18 @@
+version: '3.8' 
+
+services:
+  mysql:
+    container_name: nest-assas
+    image: mysql:8.0 
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_USER: nest-assas 
+      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: nest-assas 
+    volumes:
+      - mysql_data:/var/lib/mysql 
+
+volumes:
+  mysql_data: 
