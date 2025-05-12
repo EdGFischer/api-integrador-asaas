@@ -2,6 +2,7 @@ import { Body, ConflictException, Controller, HttpCode, Post, UsePipes } from "@
 import { PrismaService } from "src/prisma/prisma.service";
 import { z } from 'zod'
 import { ZodValidationPipe } from "src/pipes/zod-validation-pipe";
+import { AsaasService } from "@/services/asaas/asaas.service";
 
 const createClientBodySchema = z.object({
   name: z.string(),
@@ -16,7 +17,8 @@ type CreateClientBodySchema = z.infer<typeof createClientBodySchema>
 @Controller('/client')
 export class CreateClientController {
   constructor(
-        private prisma:PrismaService
+        private prisma: PrismaService,
+        private asaasService: AsaasService,
   ) {}
 
   @Post()
@@ -43,6 +45,15 @@ export class CreateClientController {
       throw new ConflictException('Client with same CNPJ already exists')
     }
 
+    
+    const asaasCustomer = await this.asaasService.createCustomer({
+      name,
+      email,
+      cpfCnpj: cnpj,
+      phone,
+      address,
+    });
+
     await this.prisma.client.create({
       data: {
         name,
@@ -50,6 +61,7 @@ export class CreateClientController {
         email,
         address,
         phone,
+        asaasCustomerId: asaasCustomer.id,
       }
     })
   }

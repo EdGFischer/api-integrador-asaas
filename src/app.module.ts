@@ -8,13 +8,18 @@ import { CreateClientController } from './controller/client/create-client.contro
 import { FetchUserClientController } from './controller/client/fetch-client.controller';
 import { DeleteClientController } from './controller/client/delete-client.controller';
 import { UpdateClientController } from './controller/client/update-client.controller';
+import { AsaasService } from './services/asaas/asaas.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    validate: env => envSchema.parse(env),
-    isGlobal: true,
-  }),
-  AuthModule],
+  imports: [
+    ConfigModule.forRoot({
+      validate: env => envSchema.parse(env),
+      isGlobal: true,
+    }),
+    HttpModule,
+    AuthModule
+  ],
   controllers: [
     AuthenticateController,
     CreateClientController,
@@ -22,6 +27,6 @@ import { UpdateClientController } from './controller/client/update-client.contro
     UpdateClientController,
     DeleteClientController,
   ],
-  providers: [PrismaService],
+  providers: [PrismaService, AsaasService],
 })
 export class AppModule {}
