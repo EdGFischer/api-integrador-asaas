@@ -35,9 +35,12 @@ export class CreateClientController {
         phone
       } = body
 
+      
+    const cleanedCnpj = cnpj.replace(/\D/g, '');
+
     const clientWithSameCNPJ = await this.prisma.client.findUnique({
       where: {
-       cnpj,
+       cnpj: cleanedCnpj,
       }
     })
 
@@ -45,7 +48,16 @@ export class CreateClientController {
       throw new ConflictException('Client with same CNPJ already exists')
     }
 
+    const clientWithSameEmail = await this.prisma.client.findUnique({
+      where: {
+       email,
+      }
+    })
     
+    if(clientWithSameEmail) {
+      throw new ConflictException('Client with same E-mail already exists')
+    }
+
     const asaasCustomer = await this.asaasService.createCustomer({
       name,
       email,
@@ -57,7 +69,7 @@ export class CreateClientController {
     await this.prisma.client.create({
       data: {
         name,
-        cnpj,
+        cnpj: cleanedCnpj,
         email,
         address,
         phone,
