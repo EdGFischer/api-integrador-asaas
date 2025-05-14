@@ -48,16 +48,6 @@ export class CreateClientController {
       throw new ConflictException('Client with same CNPJ already exists')
     }
 
-    const clientWithSameEmail = await this.prisma.client.findUnique({
-      where: {
-       email,
-      }
-    })
-    
-    if(clientWithSameEmail) {
-      throw new ConflictException('Client with same E-mail already exists')
-    }
-
     const asaasCustomer = await this.asaasService.createCustomer({
       name,
       email,
