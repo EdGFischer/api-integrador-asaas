@@ -10,7 +10,7 @@ const queryValidationPipe = new ZodValidationPipe(pageQueryParamSchema)
 
 type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
 
-@Controller('/fetchClient')
+@Controller('/client')
 @UseGuards(JwtAuthGuard)
 export class FetchUserClientController {
   constructor(
