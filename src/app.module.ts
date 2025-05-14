@@ -10,6 +10,7 @@ import { DeleteClientController } from './controller/client/delete-client.contro
 import { UpdateClientController } from './controller/client/update-client.controller';
 import { AsaasService } from './services/asaas/asaas.service';
 import { HttpModule } from '@nestjs/axios';
+import { DashboardClientController } from './controller/client/dashboard.controller';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { HttpModule } from '@nestjs/axios';
     FetchUserClientController,
     UpdateClientController,
     DeleteClientController,
+    DashboardClientController,
   ],
   providers: [PrismaService, AsaasService],
 })
