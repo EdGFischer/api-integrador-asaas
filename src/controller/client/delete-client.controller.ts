@@ -1,19 +1,30 @@
 import { Controller, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { AsaasService } from 'src/services/asaas/asaas.service';
 
 @Controller('/client')
 export class DeleteClientController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private asaasService: AsaasService,
+  ) {}
 
   @Delete('/:id')
   async delete(@Param('id', ParseIntPipe) id: number) {
-    
-    const clientExists = await this.prisma.client.findUnique({
+    const client = await this.prisma.client.findUnique({
       where: { id },
     });
 
-    if (!clientExists) {
+    if (!client) {
       throw new Error('Cliente não encontrado.');
+    }
+
+    if (client.asaasCustomerId) {
+      try {
+        await this.asaasService.deleteCustomer(client.asaasCustomerId);
+      } catch (error) {
+        console.error('Erro ao deletar cliente no Asaas:', error);
+      }
     }
 
     await this.prisma.client.delete({
