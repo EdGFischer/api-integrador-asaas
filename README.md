@@ -1,98 +1,118 @@
+<h1 align="center">
+   Api Integrador Asaas
+  <br>
+  Gerenciamento de clientes com integração ao Asaas
+</h1>
+
+<br>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <img
+    src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"
+    alt="Node.js"
+  >
+  <img
+    src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"
+    alt="TypeScript"
+  >
+  <img
+    src="https://img.shields.io/badge/nestjs-E0234E?style=for-the-badge&logo=nestjs&logoColor=white"
+    alt="NestJs"
+  >
+  <img
+    src="https://img.shields.io/badge/docker-257bd6?style=for-the-badge&logo=docker&logoColor=white"
+    alt="Docker"
+  >
+  <img
+    src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white"
+    alt="Prisma"
+  >
+  <img
+    src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"
+    alt="MySQL"
+  />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<br>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 📝 Descrição
 
-## Description
+Esta é uma API back-end desenvolvida com **NestJS**, fornecendo funcionalidades de gerenciamento de clientes com integração ao **Asaas**. A API permite a criação, atualização, listagem, e remoção de clientes, além de fornecer dados para o dashboard.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+> 🔗 O projeto **front-end** está disponível em: [github.com/EdGFischer/front-end-integrador-asaas](https://github.com/EdGFischer/front-end-integrador-asaas)
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+### :hammer_and_wrench: Tecnologias
+- [Node.js](https://nodejs.org/en)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NestJs](https://nestjs.com/)
+- [Docker](https://www.docker.com/)
+- [Prisma](https://www.prisma.io/)
+- [MySQL](https://www.mysql.com/)
 
-## Compile and run the project
+### :fire: Execução do projeto
+ 1. Instalação das dependências:
+     ```
+     npm i 
+     ```
+  2. Docker:
+     ```
+     docker compose up -d
+     ```
+  3. Gerar Prisma Client:
+     ```
+     npx prisma generate
+     ```
+  4. Migrations:
+     ```
+     npx prisma migrate dev
+     ```
+  5. Execução:
+     ```
+     npm run start:dev
+     ```
 
-```bash
-# development
-$ npm run start
+### :link: Rotas
+#### Usuários
+- `POST /sessions`: Cria um novo usuário.
+    **Body:**
+    ```json
+    {
+      "email": "exemplo@mail.com.br",
+      "password": "123456789"
+    }
+    ```
 
-# watch mode
-$ npm run start:dev
+#### Rotas de Cliente - Com exceção do POST, é necessário envio do Bearer Token
+- `POST /client`: Cria um novo cliente.
+    **Body:**
+    ```json
+    {
+      "name": "teste",
+      "email": "teste@teste.com.br",
+      "phone": "(47) 00000-0000",
+      "cnpj": "00.000.00/000-00",
+      "address": "Rua exemplo, 123"
+    }
+    ```
 
-# production mode
-$ npm run start:prod
-```
+- `GET /client?page=1`: Lista os clientes com paginação.
+    **Query Params:**
+    - `page`: número da página a ser retornada (padrão: 1).
 
-## Run tests
+- `PUT /client`: Atualiza os dados do cliente.
+    **Body:**
+    ```json
+    {
+      "name": "teste",
+      "email": "teste@teste.com.br",
+      "phone": "(47) 00000-0000",
+      "address": "Rua exemplo, 123"
+    }
+    ```
 
-```bash
-# unit tests
-$ npm run test
+- `DELETE /delete/:id`: Deleta o cliente. 
+    - **Param:** `id` do cliente.
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- `GET /dashboard`: Retorna os dados para o dashboard.
