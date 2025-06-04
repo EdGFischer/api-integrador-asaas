@@ -39,7 +39,7 @@
 
 Esta é uma API back-end desenvolvida com **NestJS**, fornecendo funcionalidades de gerenciamento de clientes com integração ao **Asaas**. A API permite a criação, atualização, listagem, e remoção de clientes, além de fornecer dados para o dashboard.
 
-> 🔗 O projeto **front-end** está disponível em: [github.com/EdGFischer/front-end-integrador-asaas](https://github.com/EdGFischer/front_end_integrador_asaas)
+> 🔗 O projeto **front-end** está disponível em: [github.com/EdGFischer/front_end_integrador_asaas](https://github.com/EdGFischer/front_end_integrador_asaas)
 
 ---
 
